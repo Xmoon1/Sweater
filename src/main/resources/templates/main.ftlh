@@ -7,7 +7,8 @@
 <h1>Sweater</h1><hr>
 <h3>Messages:</h3>
 <#list messages as message>
-    <p><b>${message.title} : </b>${message.text} : <i>${message.author}</i></p>
+    <p><b>${message.title} : </b>${message.text} : <i>${message.author}</i><form action="/delete/${message.id}" method="post"><button type="submit">delete</button></form></p>
+
 </#list>
 <hr>
 <h3>Create new message</h3>

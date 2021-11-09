@@ -1,25 +1,31 @@
 package sweater.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import sweater.model.Message;
+import sweater.repo.MessageRepository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class MessageService {
-    private List<Message> messages = new ArrayList<>();
-    {
-        messages.add(new Message("Hello, Sweater!", "Simple text", "John Conor"));
-    }
-    public void saveMessage(Message message) {
+    private final MessageRepository messageRepository;
+
+    public Message saveMessage(Message message) {
         log.info("Saving new message: {}", message);
-        messages.add(message);
+        return messageRepository.save(message);
     }
 
     public List<Message> getMessages() {
-        return messages;
+        return messageRepository.findAll();
+    }
+
+    public void delete(Long messageId) {
+        messageRepository.deleteById(messageId);
     }
 }
